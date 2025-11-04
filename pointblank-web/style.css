@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  background-color: #222;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.hud {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 18px;
+  background: rgba(0,0,0,0.4);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#arena {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  cursor: crosshair;
+}
+
+.target {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.free-rebels {
+  background-image: url('https://www.bing.com/images/search?view=detailV2&ccid=gieGB3xU&id=D671E50E0E7C64E79A5D1010BE980EAF3202AB01&thid=OIP.gieGB3xU_zygA1gSkBWd9gAAAA&mediaurl=https%3a%2f%2fpb.tamgame.com%2fimages%2fgame%2ffree_img_grey.png&exph=472&expw=334&q=karakter+free-rebels+point+blank&simid=607997203558518424&FORM=IRPRST&ck=CDA3401561D4A5E7276D17E96B9CF7A6&selectedIndex=7&itb=1');
+}
+
+.ct-force {
+  background-image: url('https://th.bing.com/th/id/OIP.8l7jiB3XrKVPI1wTM2-PzQAAAA?w=115&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7');
+}

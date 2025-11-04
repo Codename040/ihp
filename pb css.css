@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  background-color: #222;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.hud {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 18px;
+  background: rgba(0,0,0,0.4);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#arena {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  cursor: crosshair;
+}
+
+.target {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.free-rebels {
+  background-image: url('https://i.ibb.co/KV0J3cw/zombie.png');
+}
+
+.ct-force {
+  background-image: url('https://i.ibb.co/hXnB3PK/soldier.png');
+}

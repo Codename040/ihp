@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zombie Shooter</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #222;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 20px 0;
+    }
+
+    #gameArea {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 500px;
+      margin: auto;
+      background-size: cover;
+      border: 4px solid #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    .target {
+      width: 60px;
+      height: 60px;
+      background-image: url('https://i.pinimg.com/736x/03/b0/8a/03b08a39ba9a24a93d1265f5076c7960.jpg');
+      background-size: cover;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    #stats, #leaderboard {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    #startBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: limegreen;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #themeSelect {
+      margin-top: 10px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🧟 Zombie Shooter</h1>
+
+<label>Pilih Tema: </label>
+<select id="themeSelect">
+  <option value="urban">Kota Mati</option>
+  <option value="forest">Hutan</option>
+  <option value="lab">Lab Rahasia</option>
+</select>
+
+<br><br>
+<button id="startBtn">Mulai Game</button>
+<div id="stats">Klik zombie sebanyak mungkin dalam 30 detik!</div>
+<div id="gameArea"></div>
+<div id="leaderboard"><strong>Top Skor:</strong> <span id="topScore">0</span></div>
+
+<!-- Suara -->
+<audio id="shootSound" src="https://cdn.pixabay.com/download/audio/2021/08/09/audio_b7257b07a6.mp3?filename=gun-shot-1-7069.mp3&g-recaptcha-response=03AFcWeA43fwyj-Yxvpa_G2yTSTcpksuyfddI8ZUNw0AtV2YgZCgOrCSIJNlEGAfPKJTMdKh69aYLoFaeOdaiFViCBjLV3LPLKDOBkKKNU-5B0caySJbYfHV_XPo9keqRbMyBBNvsrK8pBDAjlkJwMO0iyNvXjacD7Hqhxb8HLjaR_vuWmA5c1bX0jNdMvrcSafaIdHam63qZYOKWYnMKxAW4wjXtd3bjvd3YB5B9AkJ10wV0_AIYobkxRLcVlhRLaswe1Xupj1c_l0kA9joIToK41bLhtGPdzVDHm2PKuPI2rts3YTDr-kmWha9eEzG19T2atR328XoLzalkWTBDQvALRTF45dJAGFRR-BeXJuD9SkQM4uTkaWuRyIwCCkPEKsiRkb5R4hRAGHmhSEqj-Bbp9xgcHCqoPZBR3NRTf1SqFFw4Q4Gq07EXf-CSRhnKlhFUun-u530f91qxBXbihMf5fEmsQExu3iRW2d1xMAupPCK76RA4r6FFtnULeosWcg8WMeCggANOH92nMtk-mNr5d5MmV_P31CnxlCwdDCV1HBUj2A1IVA5iTHaLn294eVeqJP05sOJxBtnqeUKDqgOUh8zLih3cI5gOn5Ex5GaLwb69_nPvbj4DYU9MLrdKiINJdRaK4fLMpDdFYoTr56VURYLzGIZFktwo2evceH3r3xu8sLyEucRJqDxM5MzwrML7zJJTd8_aXKQIZmXFe3PLe4zTfLg1-AsMpSkCllMSTEzHtu9lOK30BKG9inL50ssedlbiGFH3NqSpVDBkUJrYsUmy4DdlWfW6FcQQvR8YsuSHYJV76o3yjyRdXIpFsq_JEjt3CXkbC-ef7Ns4qrIzUuVlarBYSOMlCxJT_FudVK2POgIzTeu8xgEJu6OH5UwL8NIOmljCf&remote_template=1" preload="auto"></audio>
+
+<script>
+  const gameArea = document.getElementById('gameArea');
+  const stats = document.getElementById('stats');
+  const startBtn = document.getElementById('startBtn');
+  const topScoreDisplay = document.getElementById('topScore');
+  const themeSelect = document.getElementById('themeSelect');
+  const shootSound = document.getElementById('shootSound');
+
+  let score = 0;
+  let timeLeft = 30;
+  let gameInterval, countdownInterval;
+  let topScore = 0;
+  let target, moveInterval;
+
+  const themes = {
+    urban: "https://th.bing.com/th/id/OIP.NxTQXmS2sxJFVJZKtMTrcQHaEJ?rs=1&pid=ImgDetMain",
+    forest: "https://images.unsplash.com/photo-1543872084-c7bd3822856e",
+    lab: "https://images.unsplash.com/photo-1581093588401-8e38dc888b26"
+  };
+
+  function createMovingTarget() {
+    target = document.createElement('div');
+    target.classList.add('target');
+
+    gameArea.appendChild(target);
+    moveTarget(); // gerakan awal
+
+    target.onclick = function () {
+      score++;
+      shootSound.play();
+      updateStats();
+    };
+
+    moveInterval = setInterval(moveTarget, 1000); // zombie bergerak tiap detik
+  }
+
+  function moveTarget() {
+    const maxX = gameArea.clientWidth - 60;
+    const maxY = gameArea.clientHeight - 60;
+    target.style.left = Math.random() * maxX + "px";
+    target.style.top = Math.random() * maxY + "px";
+  }
+
+  function updateStats() {
+    stats.textContent = `⏳ Waktu: ${timeLeft}s | 💯 Skor: ${score}`;
+  }
+
+  function startGame() {
+    score = 0;
+    timeLeft = 30;
+    updateStats();
+    startBtn.disabled = true;
+    gameArea.style.backgroundImage = `url('${themes[themeSelect.value]}')`;
+
+    createMovingTarget();
+
+    gameInterval = setInterval(updateStats, 500);
+    countdownInterval = setInterval(() => {
+      timeLeft--;
+      updateStats();
+      if (timeLeft <= 0) {
+        endGame();
+      }
+    }, 1000);
+  }
+
+  function endGame() {
+    clearInterval(gameInterval);
+    clearInterval(countdownInterval);
+    clearInterval(moveInterval);
+    target.remove();
+
+    if (score > topScore) {
+      topScore = score;
+      topScoreDisplay.textContent = topScore;
+    }
+
+    stats.innerHTML = `🎮 Game selesai! Skor akhir: ${score}`;
+    startBtn.disabled = false;
+    startBtn.textContent = "Main Lagi";
+  }
+
+  startBtn.addEventListener("click", startGame);
+</script>
+
+</body>
+</html>

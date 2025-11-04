@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Kontraktor dan Konstruksi - Membangun Masa Depan</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #003366;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 1rem;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav ul li a:hover {
+            background: #FF6600;
+        }
+        .logo {
+            position: absolute;
+            left: 2rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .hero {
+            background: url('https://via.placeholder.com/1920x600?text=Proyek+Konstruksi') no-repeat center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 51, 102, 0.5); /* Overlay gelap */
+        }
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            background: #FF6600;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #CC5200;
+        }
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tentang, .layanan, .proyek, .kontak {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .layanan-grid, .proyek-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .layanan-item, .proyek-item {
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .proyek-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        form {
+            display: grid;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input, textarea {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        footer {
+            background: #003366;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            nav ul { flex-direction: column; }
+            .logo { position: static; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">PT Kontraktor</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tentang">Tentang Kami</a></li>
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#proyek">Proyek</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Membangun Masa Depan Anda</h1>
+            <p>Kami adalah mitra terpercaya dalam proyek konstruksi berkualitas tinggi.</p>
+            <a href="#kontak" class="btn">Hubungi Kami</a>
+        </div>
+    </section>
+
+    <section id="tentang" class="tentang">
+        <h2>Tentang Kami</h2>
+        <p>PT Kontraktor dan Konstruksi didirikan sejak 2005, dengan pengalaman lebih dari 20 tahun di bidang konstruksi sipil, bangunan, dan infrastruktur. Kami berkomitmen untuk memberikan solusi inovatif dan berkelanjutan.</p>
+    </section>
+
+    <section id="layanan" class="layanan">
+        <h2>Layanan Kami</h2>
+        <div class="layanan-grid">
+            <div class="layanan-item">
+                <h3>Konstruksi Bangunan</h3>
+                <p>Pembangunan gedung komersial dan residensial dengan standar tinggi.</p>
+            </div>
+            <div class="layanan-item">
+                <h3>Renovasi</h3>
+                <p>Renovasi interior dan eksterior untuk meningkatkan nilai properti Anda.</p>
+            </div>
+            <div class="layanan-item">
+                <h3>Konsultasi Proyek</h3>
+                <p>Konsultasi teknis dan manajemen proyek dari awal hingga selesai.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyek" class="proyek">
+        <h2>Proyek Terbaru</h2>
+        <div class="proyek-grid">
+            <div class="proyek-item">
+                <img src="https://via.placeholder.com/300x200?text=Proyek+1" alt="Proyek 1">
+                <h3>Gedung Kantor Modern</h3>
+                <p>Proyek selesai 2023 di Jakarta.</p>
+            </div>
+            <div class="proyek-item">
+                <img src="https://via.placeholder.com/300x200?text=Proyek+2" alt="Proyek 2">
+                <h3>Jembatan Pedestrian</h3>
+                <p>Infrastruktur kota di Bandung.</p>
+            </div>
+            <div class="proyek-item">
+                <img src="https://via.placeholder.com/300x200?text=Proyek+3" alt="Proyek 3">
+                <h3>Renovasi Rumah Sakit</h3>
+                <p>Proyek kesehatan di Surabaya.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontak" class="kontak">
+        <h2>Hubungi Kami</h2>
+        <form>
+            <input type="text" placeholder="Nama Anda" required>
+            <input type="email" placeholder="Email Anda" required>
+            <textarea placeholder="Pesan Anda" rows="5" required></textarea>
+            <button type="submit" class="btn">Kirim Pesan</button>
+        </form>
+        <p style="text-align: center; margin-top: 2rem;">Alamat: Jl. Konstruksi No. 123, Jakarta | Tel: (021) 123-4567 | Email: info@ptkontraktor.com</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 PT Kontraktor dan Konstruksi. Semua hak dilindungi.</p>
+        <p>Follow kami: <a href="#" style="color: #FF6600;">Facebook</a> | <a href="#" style="color: #FF6600;">Instagram</a></p>
+    </footer>
+
+    <script>
+        // Smooth scroll untuk navigasi
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

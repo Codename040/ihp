@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator Ilmiah Sederhana</title>
+  <link href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fopen.spotify.com%2Fintl-id%2Ftrack%2F1NAyq9TrQIpLHWStUX4xAQ&psig=AOvVaw0J344JXipYixIbMW3xYYB1&ust=1747231138590000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCJjs4cDNoI0DFQAAAAAdAAAAABAM" rel="stylesheet">
+  <style>
+    @import url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fopen.spotify.com%2Fintl-id%2Ftrack%2F1NAyq9TrQIpLHWStUX4xAQ&psig=AOvVaw0J344JXipYixIbMW3xYYB1&ust=1747231138590000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCJjs4cDNoI0DFQAAAAAdAAAAABAM');
+  
+    body {
+  background: url('https://i.scdn.co/image/ab67616d0000b2732d9e8e3e016cf68d53536c64') no-repeat center center fixed;
+  background-size: contain;
+  background-color: #dd74b3; /* fallback warna jika tidak penuh */
+  font-family: 'Poppins', sans-serif;
+     min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+  
+    .calculator {
+      background: rgba(231, 219, 228, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 25px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(208, 11, 11, 0.25);
+      width: 350px;
+      color: #ca6aa2;
+      border: 1px solid rgba(67, 49, 49, 0.2);
+    }
+
+  
+    h2 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #f3ebeb;
+      letter-spacing: 1px;
+    }
+  
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+  
+    input, select {
+      background: rgba(0, 0, 0, 0.304);
+      color: rgb(224, 220, 222);
+    }
+  
+    input::placeholder {
+      color: #d068ac;
+    }
+  
+    button {
+      background-color: #ff6fb5;
+      color: rgb(246, 241, 244);
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: none;
+    }
+  
+    button:hover {
+      background-color: #ff4d94;
+      transform: scale(1.03);
+    }
+  
+    .hasil {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ede8e8;
+    }
+  </style>  
+</head>
+<body>
+  <div class="calculator">
+    <h2>🧮 Kalkulator Ilmiah</h2>
+    <input type="number" id="angka1" placeholder="Masukkan angka pertama">
+    <input type="number" id="angka2" placeholder="Masukkan angka kedua (jika perlu)">
+    <select id="operasi">
+      <option value="">-- Pilih Operasi --</option>
+      <option value="tambah">Tambah (+)</option>
+      <option value="kurang">Kurang (-)</option>
+      <option value="kali">Kali (×)</option>
+      <option value="bagi">Bagi (÷)</option>
+      <option value="modulus">Modulus (%)</option>
+      <option value="pangkat">Pangkat (^)</option>
+      <option value="akar">Akar Kuadrat (√)</option>
+      <option value="log">Logaritma (log base 10)</option>
+      <option value="sin">sin(θ)</option>
+      <option value="cos">cos(θ)</option>
+      <option value="tan">tan(θ)</option>
+    </select>
+    <button onclick="hitung()">Hitung</button>
+    <div class="hasil" id="hasil"></div>
+  </div>
+
+  <script>
+    function hitung() {
+      const a = parseFloat(document.getElementById('angka1').value);
+      const b = parseFloat(document.getElementById('angka2').value);
+      const op = document.getElementById('operasi').value;
+      const hasilEl = document.getElementById('hasil');
+      let hasil = "";
+
+      try {
+        switch (op) {
+          case "tambah":
+            hasil = a + b;
+            break;
+          case "kurang":
+            hasil = a - b;
+            break;
+          case "kali":
+            hasil = a * b;
+            break;
+          case "bagi":
+            if (b === 0) throw "Tidak bisa dibagi dengan 0";
+            hasil = a / b;
+            break;
+          case "modulus":
+            hasil = a % b;
+            break;
+          case "pangkat":
+            hasil = Math.pow(a, b);
+            break;
+          case "akar":
+            if (a < 0) throw "Tidak bisa akar dari angka negatif";
+            hasil = Math.sqrt(a);
+            break;
+          case "log":
+            if (a <= 0) throw "Logaritma tidak terdefinisi untuk angka ≤ 0";
+            hasil = Math.log10(a);
+            break;
+          case "sin":
+            hasil = Math.sin(toRadians(a));
+            break;
+          case "cos":
+            hasil = Math.cos(toRadians(a));
+            break;
+          case "tan":
+            hasil = Math.tan(toRadians(a));
+            break;
+          default:
+            hasil = "Silakan pilih operasi";
+        }
+
+        if (!isNaN(hasil)) {
+          hasilEl.innerHTML = `Hasil: ${hasil.toFixed(6)}`;
+        } else {
+          hasilEl.innerHTML = "❌ Hasil tidak valid.";
+        }
+      } catch (err) {
+        hasilEl.innerHTML = `❌ ${err}`;
+      }
+    }
+
+    function toRadians(degree) {
+      return degree * (Math.PI / 180);
+    }
+  </script>
+</body>
+</html>

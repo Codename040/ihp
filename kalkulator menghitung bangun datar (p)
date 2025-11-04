@@ -1,0 +1,73 @@
+import math
+
+def luas_persegi(sisi):
+    return sisi * sisi
+
+def keliling_persegi(sisi):
+    return 4 * sisi
+
+def luas_persegi_panjang(p, l):
+    return p * l
+
+def keliling_persegi_panjang(p, l):
+    return 2 * (p + l)
+
+def luas_segitiga(alas, tinggi):
+    return 0.5 * alas * tinggi
+
+def keliling_segitiga(a, b, c):
+    return a + b + c
+
+def luas_lingkaran(r):
+    return math.pi * r * r
+
+def keliling_lingkaran(r):
+    return 2 * math.pi * r
+
+while True:
+    print("\n=== Kalkulator Bangun Datar ===")
+    print("1. Persegi")
+    print("2. Persegi Panjang")
+    print("3. Segitiga")
+    print("4. Lingkaran")
+    print("5. Keluar")
+
+    pilihan = input("Pilih bangun datar (1/2/3/4/5): ")
+
+    if pilihan == '1':
+        sisi = float(input("Masukkan sisi persegi: "))
+        print("Luas:", luas_persegi(sisi))
+        print("Keliling:", keliling_persegi(sisi))
+
+    elif pilihan == '2':
+        p = float(input("Masukkan panjang: "))
+        l = float(input("Masukkan lebar: "))
+        print("Luas:", luas_persegi_panjang(p, l))
+        print("Keliling:", keliling_persegi_panjang(p, l))
+
+    elif pilihan == '3':
+        alas = float(input("Masukkan alas: "))
+        tinggi = float(input("Masukkan tinggi: "))
+        a = float(input("Masukkan sisi A: "))
+        b = float(input("Masukkan sisi B: "))
+        c = float(input("Masukkan sisi C: "))
+        print("Luas:", luas_segitiga(alas, tinggi))
+        print("Keliling:", keliling_segitiga(a, b, c))
+
+    elif pilihan == '4':
+        r = float(input("Masukkan jari-jari lingkaran: "))
+        print("Luas:", luas_lingkaran(r))
+        print("Keliling:", keliling_lingkaran(r))
+
+    elif pilihan == '5':
+        print("Terima kasih telah menggunakan kalkulator bangun datar!")
+        break
+
+    else:
+        print("Pilihan tidak valid.")
+
+    # Tambahan konfirmasi looping
+    lanjut = input("\nIngin kembali ke menu utama? (y/n): ").lower()
+    if lanjut != 'y':
+        print("======= Program selesai. Sampai jumpa! =======")
+        break

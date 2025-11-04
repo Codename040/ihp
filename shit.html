@@ -1,0 +1,83 @@
+let nyawa = 3;
+
+function mulaiLevel() {
+  let batasAtas = level * 10;
+  angkaRahasia = Math.floor(Math.random() * batasAtas) + 1;
+  kesempatan = Math.max(5 - Math.floor(level / 3), 2);
+  tebakanKe = 0;
+  document.getElementById("level-info").innerText = `🔢 Level ${level} - Tebak angka antara 1 dan ${batasAtas}`;
+  document.getElementById("chance-info").innerText = `💡 Kamu punya ${kesempatan} kesempatan`;
+  document.getElementById("skor-info").innerText = `Skor: ${skor}`;
+  document.getElementById("feedback").innerText = "";
+  document.getElementById("tebakan").value = "";
+  document.getElementById("next-btn").classList.add("hidden");
+  document.getElementById("restart-btn").classList.add("hidden");
+  updateNyawaUI();
+  updateProgressBar();
+
+  if (avatarImages[level]) {
+    const avatar = document.getElementById("avatar");
+    avatar.src = avatarImages[level];
+    avatar.classList.remove("hidden");
+  }
+}
+
+function cekTebakan() {
+  const input = parseInt(document.getElementById("tebakan").value);
+  if (isNaN(input)) return;
+
+  tebakanKe++;
+
+  if (input === angkaRahasia) {
+    skor += 10 * level;
+    if (tebakanKe === 1) skor += 5;
+    document.getElementById("feedback").innerText = "🎉 Benar! Naik level!";
+    document.getElementById("next-btn").classList.remove("hidden");
+    document.getElementById("benar").play();
+
+    if (badgeImages[level]) {
+      const badge = document.getElementById("badge");
+      badge.src = badgeImages[level];
+      badge.classList.remove("hidden");
+    }
+
+    updateLeaderboard();
+  } else {
+    document.getElementById("feedback").innerText = input < angkaRahasia ?
+      `📉 Terlalu kecil! Sisa: ${kesempatan - tebakanKe}` :
+      `📈 Terlalu besar! Sisa: ${kesempatan - tebakanKe}`;
+    document.getElementById("salah").play();
+  }
+
+  if (tebakanKe >= kesempatan && input !== angkaRahasia) {
+    nyawa--;
+    updateNyawaUI();
+    if (nyawa <= 0) {
+      document.getElementById("feedback").innerText = `💀 GAME OVER! Angkanya: ${angkaRahasia}`;
+      document.getElementById("restart-btn").classList.remove("hidden");
+      document.getElementById("menang").play();
+      updateLeaderboard();
+    } else {
+      document.getElementById("feedback").innerText += ` 😵 Kamu kehilangan nyawa! Nyawa tersisa: ${nyawa}`;
+      mulaiLevel();
+    }
+  }
+
+  document.getElementById("skor-info").innerText = `Skor: ${skor}`;
+}
+
+function updateNyawaUI() {
+  const nyawaInfo = document.getElementById("nyawa-info");
+  nyawaInfo.innerText = "❤️".repeat(nyawa);
+}
+
+function updateProgressBar() {
+  const progress = document.getElementById("level-progress");
+  progress.value = level;
+  progress.max = level + 5; // atau tetap 10
+}
+
+// Mode gelap
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kalkulator Bangun Datar</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Kalkulator Bangun Datar</h1>
+    <select id="shape">
+      <option value="">-- Pilih Bangun Datar --</option>
+      <option value="persegi">Persegi</option>
+      <option value="persegiPanjang">Persegi Panjang</option>
+      <option value="segitiga">Segitiga</option>
+      <option value="lingkaran">Lingkaran</option>
+      <option value="jajarGenjang">Jajar Genjang</option>
+      <option value="belahKetupat">Belah Ketupat</option>
+    </select>
+
+    <div id="inputFields"></div>
+
+    <button onclick="hitung()">Hitung</button>
+
+    <div id="hasil"></div>
+
+    <h2>📄 Riwayat Perhitungan</h2>
+    <ul id="riwayat"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
